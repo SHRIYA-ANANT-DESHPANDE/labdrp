@@ -1,0 +1,35 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "labdrop"
+version = "0.1.0"
+description = "Interactive terminal recording for lab assignments"
+requires-python = ">=3.10"
+dependencies = [
+    "pyte>=0.8.2,<0.9",
+    "rich>=13.7,<15",
+    "typer>=0.12,<1",
+    "fastapi>=0.115,<1",
+    "uvicorn>=0.30,<1",
+    "python-multipart>=0.0.9,<1",
+]
+
+[project.optional-dependencies]
+dev = ["httpx>=0.27,<1", "pytest>=8,<9", "ruff>=0.6,<1"]
+
+[project.scripts]
+labdrop = "labdrop.cli.app:app"
+labdrop-admin = "labdrop.server.admin:app"
+
+[tool.setuptools.packages.find]
+include = ["labdrop*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+extend-exclude = ["labdrop-doctor"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
